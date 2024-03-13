@@ -1,0 +1,92 @@
+	public文件夹：一般放置一些静态资源（图片），需要注意：放在public文件夹中的静态资源，
+webpack进行打包的时候，会原封不动的打包到dist文件夹中。
+
+src文件夹：（程序员源代码文件夹）
+	asset文件夹：一般也是放置静态资源（一般放置多个组件公用的静态资源），需要注意，放置在
+asset文件夹的静态资源，在webpack打包的时候，会把静态资源当做一个模块，打包在JS文件里面。
+
+src文件夹简写方法：配置别名在jsconfig.json文件中
+
+/****************  2024-1-10  ******************/
+page文件夹放置路由组件
+
+注册完路由组件，不管是路由组件还是非路由组件，身上都有$route和$router属性
+$route: 一般获取路由信息[路径，query, params等等]
+$router : 一般进行编程式导航，进行路由跳转[push|replace]
+
+声明式导航能做的，编程式导航都能做。
+但是编程式导航除了可以进行路由跳转，还可以做一些其他的业务。
+
+路由传参：
+params参数：属于路径当中的一部分，需要注意，在配置路由的时候，需要占位。
+query传参，不属于路径当中的一部分，类似ajax当中的queryString   /home?k=value,不需要占位.
+
+
+<!--     面试题           -->
+1、路由传递参数（对象写法）path是否可以结合params参数一起使用？  答：不能
+2、如果路由要求传递params参数，但是就是不传递这个参数，会导致URL有问题，
+如何指定params参数可传可不传？设置：path : "/search/:keyword?",（加上'？'）
+3、路由组件传递props的方式：
+{
+		name : 'search',
+		path : "/search/:keyword?",
+		component : Search,
+		meta : {showFooter : true},
+		props : true,
+},
+
+Search路由组件中使用props : ['keyword']引入
+注意:只能传递params参数。
+
+/****************  2024-1-11  ******************/
+p12   三级联动
+http://gmall-h5-api.atguigu.cn    数据接口
+http://39.98.123.211:8170/swagger-ui.html	//这个
+http://39.98.123.211:8416/swagger-ui.html
+
+http://82.156.11.187/#/home
+
+https://element.eleme.cn/#/zh-CN/
+
+<!--     面试题       -->
+跨域问题：
+什么事跨域：协议，域名，端口号不同请求，就是跨域。
+解决方案：JSON CROS 代理
+await reqCategoryList()  //得到的是promise对象的正确返回值
+this.$store.dispatch('categoryList2');  //不需要指定哪个module
+节流：在规定的间隔时间范围内不会重复触发回调，只有大于这个时间间隔才会触发回调，把频繁触发变成少量触发。
+防抖：前面的所有的触发都被取消，最后一次执行在规定的时间之后才会触发，也就是说如果连续快速的触发，只会触发执行一次。
+H5新增：本地存储和会话存储
+本地存储：持久化，最多5M
+会话：非持久的,会话结束就消失
+
+router-link: 是一个组件，当服务器的数据返回以后，循环出很多router-link组件，如果一瞬间创建的组件太多，会很耗内存，因此出现卡顿现象
+------>
+
+
+mock使用步骤
+https://mockjs.fenxianglu.cn/
+https://mockjs.fenxianglu.cn/api/syntax.html
+1、在项目中src文件夹创建mock文件夹
+2、第二部准备JSON数据（mock文件夹中创建相应的json文件），注意要格式下，不要留空格。
+3、把mock数据需要的图片放置到public文件夹中，Public文件夹在打包的时候，会把相应的资源原封不动的打包到dist文件夹中。
+4、开始mock虚拟数据，创建mockServer.js文件通过mockjs插件实现模拟数据。
+5、mockServer.js文件在入口文件中引入（至少需要执行一次，才能模拟数据）
+
+<!--     特别注意          -->
+->webpack默认对外暴露的数据格式：图片，json
+->数据加载完毕以后，html结构渲染还需要时间，这种情况很容易出现问题
+->vm.$nextTick([callback]) 此函数在下次DOM更新，循环结束后，延迟回调。也就是等数据加载完毕，并且渲染好DOM结构之后才执行。通常和watch配合使用
+->Ajox 用post传递参数的时候， {data : params, }  params至少是一个空数组。
+mapGetters(['goodsList']) 传递的数组，因为getters计算是没有划分模块
+->标签中的style定义的样式，无法通过动态修改:class="{active:1}"  这样不能修改样式
+-> import * as API from '@/api'  //统一引入api文件夹中的全部请求函数
+->生命周期函数不能加async
+
+自己注册的用户和密码： 13800001234  123456
+测试用户和密码
+13700000000  111111
+图片懒加载  vue-lazyload
+vee-validate  表单验证
+
+
